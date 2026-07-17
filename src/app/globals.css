@@ -1,26 +1,240 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --obsidian: #0C0C0E;
+  --charcoal: #141416;
+  --pearl: #1C1C20;
+  --bone: #2A2A2E;
+  --champagne: #C8B882;
+  --champagne-light: #DDD0A4;
+  --champagne-dim: #9A8D64;
+  --ivory: #E8E2D6;
+  --slate: #7A7A82;
+  --background: var(--obsidian);
+  --foreground: var(--ivory);
+  --gold: var(--champagne);
+  --gold-light: var(--champagne-light);
+  --gold-dark: var(--champagne-dim);
+  --charcoal-light: var(--pearl);
+  --cream: var(--ivory);
+  --cream-muted: var(--slate);
+  --border-subtle: rgba(200, 184, 130, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-light: var(--charcoal-light);
+  --color-cream: var(--cream);
+  --color-cream-muted: var(--cream-muted);
+  --color-border-subtle: var(--border-subtle);
+  --color-obsidian: var(--obsidian);
+  --color-pearl: var(--pearl);
+  --color-bone: var(--bone);
+  --color-champagne: var(--champagne);
+  --color-ivory: var(--ivory);
+  --color-slate: var(--slate);
+  --color-white: #FFFFFF;
+  --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display: Georgia, 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', Consolas, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--obsidian);
+  color: var(--ivory);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+::selection {
+  background: var(--champagne);
+  color: var(--obsidian);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bone);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--champagne-dim);
+}
+
+/* ─── Animations ─── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes drawLine {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes drawLineH {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-slide-up-d1 {
+    animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up-d2 {
+    animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up-d3 {
+    animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    opacity: 0;
+  }
+
+  .animate-draw-v {
+    transform-origin: top;
+    animation: drawLine 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    transform: scaleY(0);
+  }
+
+  .animate-draw-h {
+    transform-origin: left;
+    animation: drawLineH 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+    transform: scaleX(0);
+  }
+
+  .animate-gentle-pulse {
+    animation: gentlePulse 4s ease-in-out infinite;
+  }
+}
+
+/* Reduced motion: show everything immediately */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-up-d1,
+  .animate-slide-up-d2,
+  .animate-slide-up-d3,
+  .animate-slide-left {
+    animation: none;
+    opacity: 1;
+  }
+  .animate-draw-v,
+  .animate-draw-h {
+    animation: none;
+    transform: scaleY(1) scaleX(1);
+  }
+  .animate-gentle-pulse {
+    animation: none;
+  }
+}
+
+/* ─── Utilities ─── */
+
+.font-display {
+  font-family: Georgia, 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+.gold-line-v {
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--champagne), transparent);
+}
+
+.gold-line-h {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--champagne), transparent);
+}
+
+.section-number {
+  font-family: 'SF Mono', 'Cascadia Code', Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--champagne-dim);
+}
+
+.card-hover {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.5s ease,
+              border-color 0.5s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+}
+
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.liquid-glass:hover {
+  background: rgba(12, 12, 14, 0.95);
+  border-color: rgba(200, 184, 130, 0.3);
+}
+
+.liquid-glass:hover .text-obsidian,
+.liquid-glass:hover .text-charcoal,
+.liquid-glass:hover .text-slate {
+  color: #E8E2D6;
+}
+
+.liquid-glass:hover .text-champagne-dim {
+  color: #C8B882;
+}
+
+.liquid-glass:hover .border-bone\/50 {
+  border-color: rgba(200, 184, 130, 0.2);
+}
+
+/* Architectural grid pattern for hero */
+.arch-grid {
+  background-image:
+    linear-gradient(var(--bone) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bone) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.15;
 }
