@@ -43,7 +43,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="relative p-8 bg-pearl/50 border border-bone/30 hover:border-champagne/20 transition-all duration-700 group"
+              className="relative p-8 bg-pearl/50 border border-bone/30 hover:border-champagne/20 transition-all duration-700 group flex flex-col"
             >
               {/* Large quotation mark */}
               <div className="font-display text-champagne/15 text-[80px] leading-none absolute top-4 left-6 select-none group-hover:text-champagne/25 transition-colors duration-700">
@@ -51,12 +51,12 @@ export default function Testimonials() {
               </div>
 
               {/* Quote text */}
-              <p className="relative z-10 text-ivory/80 text-sm leading-relaxed mb-10 italic font-display mt-12">
+              <p className="relative z-10 text-ivory/80 text-sm leading-relaxed italic font-display mt-12 flex-1">
                 {testimonial.text}
               </p>
 
               {/* Divider */}
-              <div className="w-8 h-px bg-champagne/30 mb-6" />
+              <div className="w-8 h-px bg-champagne/30 mt-10 mb-6" />
 
               {/* Author */}
               <div className="flex items-center gap-4">
